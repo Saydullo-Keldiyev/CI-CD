@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: BI_DASHBOARD
+  profiles:
+    active: dev
