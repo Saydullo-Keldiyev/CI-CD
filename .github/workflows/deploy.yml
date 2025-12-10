@@ -39,35 +39,26 @@ jobs:
       - name: Run tests
         run: mvn test
 
+      # -----------------------
+      # DOCKER IMAGE PULL QO‘SHILDI
+      # -----------------------
+      - name: Pull Docker image
+        run: |
+          echo "Pulling docker image..."
+          docker pull your-docker-image:latest
+          # masalan:
+          # docker pull openjdk:17-jdk
+      # -----------------------
+
       - name: Show selected options
         run: |
           echo "Environment chosen: ${{ github.event.inputs.environment }}"
           echo "Deploy? ${{ github.event.inputs.deploy }}"
 
-  deploy:
-    if: ${{ github.event.inputs.deploy == 'true' }}
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Deploy to Server via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            echo "Deploying to environment: ${{ github.event.inputs.environment }}"
-
-            # Docker Hub login
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-            # Pull latest image
-            docker pull ${{ secrets.DOCKER_USERNAME }}/simple-app:latest
-
-            # Optional: stop previous container
-            docker stop simple-app || true
-            docker rm simple-app || true
-
-            # Run new container
-            docker run -d --name simple-app -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/simple-app:latest
+      - name: Deploy (only if checkbox = true)
+        if: ${{ github.event.inputs.deploy == 'true' }}
+        run: |
+          echo "Deploying to environment: ${{ github.event.inputs.environment }}"
+          # your deploy commands here
+          # example:
+          # scp target/app.jar user@server:/deploy/path/
