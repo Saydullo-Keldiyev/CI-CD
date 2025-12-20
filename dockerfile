@@ -9,7 +9,7 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-COPY --from=man /app/target/*.jar /app/target/bg-dashboard.jar
+COPY --from=man /app/target/*.jar /app/target/chat.jar
 
 EXPOSE 8080
 
