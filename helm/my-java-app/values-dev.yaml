@@ -1,7 +1,0 @@
-replicaCount: 1
-
-env:
-  SPRING_PROFILES_ACTIVE: dev
-
-ingress:
-  enabled: false
