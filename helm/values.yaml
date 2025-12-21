@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: saydullox/simple-java-app
-  tag: "latest"
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
@@ -10,15 +10,15 @@ service:
   port: 8080
 
 env:
-  SPRING_PROFILES_ACTIVE: default
+  SPRING_PROFILES_ACTIVE: test
 
 resources:
   requests:
-    cpu: "250m"
-    memory: "256Mi"
+    cpu: "100m"
+    memory: "128Mi"
   limits:
-    cpu: "500m"
-    memory: "512Mi"
+    cpu: "300m"
+    memory: "256Mi"
 
 ingress:
   enabled: false
