@@ -31,19 +31,19 @@ spec:
               value: "{{ $v }}"
             {{- end }}
 
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 15
-            periodSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: {{ .Values.service.port }}
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 5
 
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 30
-            periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: {{ .Values.service.port }}
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
